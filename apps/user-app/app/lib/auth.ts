@@ -10,7 +10,7 @@ export const authOptions = {
             name: 'Credentials',
             credentials: {
                 phone: { label: "Phone number", type: "text", placeholder: "1231231231" },
-                password: { label: "Password", type: "password", placeholder: "********" }
+                password: { label: "Password", type: "password" }
             },
             // TODO: User credentials type from next-aut
             async authorize(credentials: any) {
@@ -38,7 +38,13 @@ export const authOptions = {
                     const user = await prisma.user.create({
                         data: {
                             number: credentials.phone,
-                            password: hashedPassword
+                            password: hashedPassword,
+                            Balance: {
+                                create: {
+                                    amount: 0,
+                                    locked: 0
+                                }
+                            }
                         }
                     });
 
