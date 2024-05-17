@@ -11,7 +11,7 @@ async function getP2PTransactions() {
             fromUserId: Number(session?.user?.id)
         }
     });
-    return txns.map(t => ({
+    return txns.map((t: { timestamp: any; amount: any; }) => ({
         time: t.timestamp,
         amount: t.amount,
     }))
@@ -21,6 +21,6 @@ export default async function () {
     const transactions = await getP2PTransactions()
     return <div className="w-full">
         <SendCard />
-        <P2PTransaction transactions={transactions}/>
+        <P2PTransaction transactions={transactions} />
     </div>
 }
